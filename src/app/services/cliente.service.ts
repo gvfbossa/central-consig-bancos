@@ -7,7 +7,7 @@ import { Cliente } from '../models/cliente.model';
   providedIn: 'root',
 })
 export class ClienteService {
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = 'https://centralconsig-backend-cf0104558953.herokuapp.com/';
 
   clientes: Cliente[] = [];
 

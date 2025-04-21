@@ -7,7 +7,7 @@ import { Proposta } from '../models/proposta.model';
   providedIn: 'root',
 })
 export class PropostaService {
-  private baseUrl = 'http://localhost:8080/proposta';
+  private baseUrl = 'https://centralconsig-backend-cf0104558953.herokuapp.com/proposta';
 
   constructor(private http: HttpClient) {}
 
