@@ -1,0 +1,98 @@
+<h2>Propostas</h2>
+<div class="toggle-container">
+  <label class="toggle-label">
+    Preenchimento Automático
+  </label>
+  <label class="switch">
+    <input type="checkbox" [checked]="propostaAutomaticaAtiva" (change)="onToggle()" [disabled]="carregando">
+    <span class="slider"></span>
+  </label>
+  <span class="status-label">
+    {{ propostaAutomaticaAtiva ? 'Ativado' : 'Desativado' }}
+  </span>
+</div>  
+<div *ngIf="errorMessage" class="erro">{{ errorMessage }}</div>
+
+<div class="div-filtros">
+    <div class="div-input-lupa">
+        <input
+            type="text"
+            placeholder="Buscar Proposta por número, CPF ou nome"
+            [(ngModel)]="buscaTexto"
+        />
+        <mat-icon (click)="filtrarPropostas()" class="btn-lupa">search</mat-icon>
+    </div>
+    
+    <button
+     *ngIf="propostas.length > 0"
+      class="btn-selecionadas"
+      (click)="mostrarPropostasSelecionadas()"
+      [disabled]="propostasSelecionadas.length === 0">
+      Mostrar Propostas Selecionadas
+    </button>
+</div>  
+
+  <div class="div-btn-cancelar">
+      <button
+        *ngIf="propostas.length > 0"
+        class="btn-cancelar"
+        (click)="cancelarPropostasSelecionadas()"
+        [disabled]="propostasSelecionadas.length === 0">
+        Cancelar Propostas Selecionadas
+      </button>
+  </div>
+<div *ngIf="loading">Carregando propostas...</div>
+
+<table *ngIf="propostas.length > 0">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Nº Proposta</th>
+      <th>Valor Liberado</th>
+      <th>Valor Parcela</th>
+      <th>Data Cadastro</th>
+      <th>Link Assinatura</th>
+      <th>
+        <button
+            class="btn-limpar"
+            (click)="limparSelecao()"
+            [disabled]="propostasSelecionadas.length === 0">
+            Limpar Seleção
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let proposta of propostasFiltradas">
+      <td>{{ proposta.cliente.nome }}</td>
+      <td>{{ proposta.cliente.cpf }}</td>
+      <td>{{ proposta.numeroProposta }}</td>
+      <td>R$ {{ proposta.valorLiberado | number:'1.2-2' }}</td>
+      <td>R$ {{ proposta.valorParcela | number:'1.2-2' }}</td>
+      <td>{{ proposta.dataCadastro | date:'dd/MM/yyyy' }}</td>
+      <td><a [href]="proposta.linkAssinatura" target="_blank">Link</a></td>
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="proposta.selecionada"
+          (change)="onSelecionarProposta(proposta, $event)"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="propostas.length === 0">
+  <thead>
+    <tr>
+      <th class="sem-propostas">Não há propostas cadastras no sistema</th>
+    </tr>
+    </thead>
+</table>
+<div *ngIf="propostas.length > 0">
+  <button
+  class="btn-download"
+  (click)="baixarExcelPropostas()">
+  Download Excel Propostas
+</button>
+</div>

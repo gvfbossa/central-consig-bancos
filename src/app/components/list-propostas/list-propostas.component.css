@@ -1,0 +1,214 @@
+/* CONTAINER GERAL */
+:host {
+  display: block;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+/* MENSAGEM DE LOADING */
+div[ng-reflect-ng-if="true"]:not(.erro) {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* MENSAGEM DE ERRO */
+.erro {
+  color: #b00020;
+  background-color: #ffe6e6;
+  padding: 1rem;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* TABELA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 5rem;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+td a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+tr:hover {
+  background-color: #fafafa;
+}
+
+th:first-child,
+td:first-child {
+  width: 40px;
+  text-align: center;
+}
+
+.btn-cancelar, .btn-limpar, .btn-selecionadas, .btn-download {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #bb2d3b;
+}
+
+.btn-limpar {
+  background-color: #dca435;
+  color: white;
+}
+
+.btn-limpar:hover {
+  background-color: #b2852b;
+}
+
+.btn-selecionadas, .btn-download {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-selecionadas:hover {
+  background-color: #218838;
+}
+
+.div-filtros {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.div-input-lupa input, .div-filtros input {
+  padding: 0.5rem;
+  width: 100%;
+  min-width: 260px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.div-input-lupa {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.btn-lupa {
+  color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-lupa:hover {
+  color: #0056b3;
+}
+
+/* Estilos do toggle */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toggle-label {
+  font-size: 0.8rem;
+  color: #333;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+input:disabled + .slider {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.status-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: bold;
+  margin-left: 10px;
+}

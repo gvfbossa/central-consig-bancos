@@ -1,0 +1,43 @@
+<div class="search-sheet">
+    <h2>Gerenciamento da Base de Dados</h2>
+  
+    <form [formGroup]="sheetsForm" (ngSubmit)="inserirSheet()">
+      <div>
+        <label for="fileName">Aba:</label>
+        <input id="fileName" formControlName="fileName" type="text" placeholder="Digite o Nome da Aba" />
+      </div>
+  
+      <div>
+        <label for="url">Link:</label>
+        <input id="url" formControlName="url" type="text" placeholder="Digite o Link da Aba" />
+      </div>
+  
+      <button type="submit">Inserir</button>
+    </form>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    
+    <h3>Abas Cadastradas</h3>
+    <table *ngIf="sheets.length > 0">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody class="bd">
+        <tr *ngFor="let sheet of sheets">
+          <td class="dados">{{ sheet.fileName }}</td>
+          <td>
+            <button class="button-rmv" (click)="removerSheet(sheet.fileName)">Remover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <p *ngIf="sheets.length === 0">Nenhuma aba cadastrada.</p>
+</div>
+  
+<div class="separator"><span>a</span></div>

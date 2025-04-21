@@ -1,0 +1,62 @@
+<div *ngIf="cliente" class="cliente-result">
+  <h3>Dados do Cliente</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Tipo Vínculo</th>
+        <th>Órgão</th>
+        <th>Matrícula Pensionista</th>
+        <th>Telefone</th>
+        <th>Black List</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.cpf }}</td>
+        <td>{{ cliente.vinculos && cliente.vinculos.length > 0 ? cliente.vinculos[0].tipoVinculo : '-' }}</td>
+        <td>{{ cliente.vinculos && cliente.vinculos.length > 0 ? cliente.vinculos[0].orgao : '-' }}</td>
+        <td>{{ cliente.vinculos && cliente.vinculos.length > 0 ? cliente.vinculos[0].matriculaPensionista : '-' }}</td>
+        <td>{{ cliente.telefone || '-' }}</td>
+        <td>
+          <input 
+            type="checkbox" 
+            [checked]="cliente.blackList" 
+            (change)="atualizaBlackList(cliente.cpf)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="cliente.vinculos && cliente.vinculos.length > 0">
+    <h4>Histórico</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Margem Crédito</th>
+          <th>Autorização Crédito</th>
+          <th>Situação Crédito</th>
+          <th>Margem Benefício</th>
+          <th>Autorização Benefício</th>
+          <th>Situação Benefício</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vinculo of cliente.vinculos">
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.dataConsulta }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.margemCredito }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.autorizacaoCredito }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.situacaoCredito }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.margemBeneficio }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.autorizacaoBeneficio }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.situacaoBeneficio }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr />
+</div>

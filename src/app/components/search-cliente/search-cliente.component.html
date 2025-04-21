@@ -1,0 +1,32 @@
+<div class="search-cliente">
+    <h2>Pesquisa de Cliente</h2>
+  
+    <form [formGroup]="clienteForm" (ngSubmit)="onSearch()">
+      <div>
+        <label for="cpf">CPF:</label>
+        <input id="cpf" formControlName="cpf" type="text" placeholder="Digite o CPF" />
+        <div *ngIf="clienteForm.get('cpf')?.invalid && clienteForm.get('cpf')?.touched">
+          <small *ngIf="clienteForm.get('cpf')?.hasError('required')">CPF é obrigatório.</small>
+          <small *ngIf="clienteForm.get('cpf')?.hasError('pattern')">CPF inválido.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="matricula">Matrícula:</label>
+        <input id="matricula" formControlName="matricula" type="text" placeholder="Digite a Matrícula" />
+        <div *ngIf="clienteForm.get('matricula')?.invalid && clienteForm.get('matricula')?.touched">
+          <small *ngIf="clienteForm.get('matricula')?.hasError('required')">Matrícula é obrigatória.</small>
+        </div>
+      </div>
+  
+      <button type="submit">Buscar</button>
+    </form>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+</div>
+<button 
+  class="btn-atualizar"
+  (click)="atualizaBaseDeDadosCliente()">
+    Atualizar Base de Dados Cliente</button>
+<app-cliente-result [cliente]="cliente"></app-cliente-result>

@@ -1,0 +1,74 @@
+.cliente-result {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicionando uma sombra suave */
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto; /* Permite que as colunas tenham largura flexível */
+}
+
+thead {
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+th {
+  padding: 12px 8px;
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+  color: #555;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+td {
+  padding: 10px 8px;
+  border: 1px solid #ddd;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 0.8rem; /* Reduzindo o tamanho da fonte para dispositivos menores */
+  }
+
+  th, td {
+    padding: 8px;
+  }
+}
