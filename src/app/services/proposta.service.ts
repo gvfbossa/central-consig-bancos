@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Proposta } from '../models/proposta.model';
 
@@ -30,10 +30,16 @@ export class PropostaService {
   }
   
   downloadExcelPropostas(numeros: string[]): Observable<HttpResponse<Blob>> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
     return this.http.post(`${this.baseUrl}/excel`, numeros, {
+      headers,
       responseType: 'blob',
       observe: 'response'
     });
   }
+  
 
 }
