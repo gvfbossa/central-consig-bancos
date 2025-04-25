@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SystemConfigurationService {
-  private baseUrl = 'https://centralconsig-backend-cf0104558953.herokuapp.com/api/system-configuration';
+  private baseUrl = 'https://centralconsig.ngrok.app/api/system-configuration';
 
   constructor(private http: HttpClient) {}
 

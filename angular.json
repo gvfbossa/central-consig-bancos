@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "docs",
-            "baseHref": "/central-consig-bancos",
+            "baseHref": "/centralconsig-bancos",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [

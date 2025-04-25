@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SheetService {
-  private baseUrl = 'https://centralconsig-backend-cf0104558953.herokuapp.com/'; 
+  private baseUrl = 'https://centralconsig.ngrok.app/'; 
 
   constructor(private http: HttpClient) {}
 
