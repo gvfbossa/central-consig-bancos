@@ -50,6 +50,7 @@ export class PropostaListComponent implements OnInit {
         this.propostas = res;
         this.errorMessage = null;
         this.loading = false;
+        this.propostas = this.propostas.filter(p => !!p.valorLiberado);
         this.propostasFiltradas = [...this.propostas];
       },
       error: () => {
