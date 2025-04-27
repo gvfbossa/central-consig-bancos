@@ -54,7 +54,7 @@ export class PropostaListComponent implements OnInit {
       },
       error: () => {
         this.propostas = [];
-        this.errorMessage = 'Erro ao buscar propostas';
+        this.errorMessage = 'Erro ao buscar as Propostas';
       }
     });
   }
