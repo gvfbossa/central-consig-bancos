@@ -213,3 +213,9 @@ input:disabled + .slider {
   font-weight: bold;
   margin-left: 10px;
 }
+
+.height_tabela {
+  max-height: 25rem;
+  overflow: auto;
+  margin-bottom: 1rem;
+}

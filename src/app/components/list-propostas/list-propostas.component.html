@@ -43,6 +43,7 @@
   </div>
 <div *ngIf="loading">Carregando propostas...</div>
 
+<div class="height_tabela">
 <table *ngIf="propostas.length > 0">
   <thead>
     <tr>
@@ -89,6 +90,7 @@
     </tr>
     </thead>
 </table>
+</div>
 <div> <!-- *ngIf="propostas.length > 0"> -->
   <button
   class="btn-download"
