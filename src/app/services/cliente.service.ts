@@ -40,7 +40,7 @@ export class ClienteService {
         'Content-Type': 'application/json'
       });
     
-      return this.http.post(`${this.baseUrl}/cliente/excel`, {}, {
+      return this.http.post(`${this.baseUrl}cliente/excel`, {}, {
         headers,
         responseType: 'blob',
         observe: 'response'

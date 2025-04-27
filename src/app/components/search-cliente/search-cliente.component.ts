@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResultClienteComponent } from '../result-cliente/result-cliente.component';
 import { Cliente } from '../../models/cliente.model';
+import FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-search-cliente',
@@ -74,8 +75,16 @@ export class SearchClienteComponent {
   }
 
   relatorioMargensCliente() {
-    this.clienteService.relatorioMargensCliente();
+    this.clienteService.relatorioMargensCliente().subscribe((response) => {
+          if (response.body) {
+            const file = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const dataFormatada = new Date().toLocaleDateString('pt-BR');
+            const nomeArquivo = "Relatorio_Propostas_" + dataFormatada + ".xlsx";
+            FileSaver.saveAs(file, nomeArquivo);
+          } else {
+            alert('Erro ao baixar o arquivo, tente novamente.');
+          }
+        });
   }
-  
 
 }
