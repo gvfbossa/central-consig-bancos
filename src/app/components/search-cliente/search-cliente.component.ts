@@ -79,7 +79,7 @@ export class SearchClienteComponent {
           if (response.body) {
             const file = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const dataFormatada = new Date().toLocaleDateString('pt-BR');
-            const nomeArquivo = "Relatorio_Propostas_" + dataFormatada + ".xlsx";
+            const nomeArquivo = "Relatorio_Clientes_Margens_" + dataFormatada + ".xlsx";
             FileSaver.saveAs(file, nomeArquivo);
           } else {
             alert('Erro ao baixar o arquivo, tente novamente.');
