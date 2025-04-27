@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cliente } from '../models/cliente.model';
 
@@ -31,10 +31,20 @@ export class ClienteService {
     return this.http.post<void>(`${this.baseUrl}cliente/black-list`, {}, { params });
   }
 
-
-
   atualizaBaseDeDadosCliente(): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}api/sheets/download`, {});
   }
+
+  relatorioMargensCliente(): Observable<HttpResponse<Blob>> {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+    
+      return this.http.post(`${this.baseUrl}/cliente/excel`, {}, {
+        headers,
+        responseType: 'blob',
+        observe: 'response'
+      });
+    }
   
 }

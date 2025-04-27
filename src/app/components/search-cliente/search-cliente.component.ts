@@ -72,6 +72,10 @@ export class SearchClienteComponent {
       }
     });
   }
+
+  relatorioMargensCliente() {
+    this.clienteService.relatorioMargensCliente();
+  }
   
 
 }
