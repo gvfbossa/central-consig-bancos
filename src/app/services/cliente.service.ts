@@ -35,12 +35,12 @@ export class ClienteService {
     return this.http.post<void>(`${this.baseUrl}api/sheets/download`, {});
   }
 
-  relatorioMargensCliente(): Observable<HttpResponse<Blob>> {
+  relatorioMargensCliente(dataInicio: Date): Observable<HttpResponse<Blob>> {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json'
       });
     
-      return this.http.post(`${this.baseUrl}cliente/excel`, {}, {
+      return this.http.post(`${this.baseUrl}cliente/excel`, {dataInicio}, {
         headers,
         responseType: 'blob',
         observe: 'response'

@@ -25,10 +25,14 @@
       {{ errorMessage }}
     </div>
 </div>
-<button 
-  class="btn-excel"
-  (click)="relatorioMargensCliente()">
-    Relatório Margens Cliente</button>
+<div class="rel-div">
+  <span>Selecione a data de início do Relatório:</span>
+  <input class="data-rel" type="date" (input)="onInputChange($event)" />
+  <button 
+    class="btn-excel"
+    (click)="relatorioMargensCliente()">
+      Relatório Margens Cliente</button> 
+</div>
 <button 
   class="btn-atualizar"
   (click)="atualizaBaseDeDadosCliente()">

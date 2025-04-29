@@ -22,6 +22,7 @@ export class SearchClienteComponent {
   clienteForm: FormGroup;
   errorMessage: string | null = null;
   cliente: Cliente | null = null;
+  dataInicio: any;
   
   constructor(
     public clienteService: ClienteService,
@@ -48,7 +49,6 @@ export class SearchClienteComponent {
         if (this.cliente && this.cliente.vinculos) {
           this.cliente.vinculos = this.cliente.vinculos.filter(vinculo => vinculo.orgao && vinculo.orgao.trim() !== '');
           
-          // Filtra os históricos dentro dos vínculos, removendo os que têm 'dataConsulta' null ou vazio
           this.cliente.vinculos.forEach(vinculo => {
             vinculo.historicos = vinculo.historicos ? vinculo.historicos.filter(historico => historico.dataConsulta && historico.dataConsulta.trim() !== '') : [];
           });
@@ -73,9 +73,17 @@ export class SearchClienteComponent {
       }
     });
   }
+  
+  onInputChange(event: any) {
+    this.dataInicio = event.target.value;
+  }
 
   relatorioMargensCliente() {
-    this.clienteService.relatorioMargensCliente().subscribe((response) => {
+    if (this.dataInicio === undefined)
+      this.dataInicio = new Date()
+
+    console.log('dataInicio ', this.dataInicio)
+    this.clienteService.relatorioMargensCliente(this.dataInicio).subscribe((response) => {
           if (response.body) {
             const file = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const dataFormatada = new Date().toLocaleDateString('pt-BR');
