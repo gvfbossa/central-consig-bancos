@@ -47,10 +47,10 @@
       <tbody>
         <tr *ngFor="let vinculo of cliente.vinculos">
           <td *ngFor="let historico of vinculo.historicos">{{ historico.dataConsulta }}</td>
-          <td *ngFor="let historico of vinculo.historicos">{{ historico.margemCredito }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.margemCredito === '' ? '0,00' : historico.margemCredito }}</td>
           <td *ngFor="let historico of vinculo.historicos">{{ historico.autorizacaoCredito }}</td>
           <td *ngFor="let historico of vinculo.historicos">{{ historico.situacaoCredito }}</td>
-          <td *ngFor="let historico of vinculo.historicos">{{ historico.margemBeneficio }}</td>
+          <td *ngFor="let historico of vinculo.historicos">{{ historico.margemBeneficio === '' ? '0,00' : historico.margemBeneficio }}</td>
           <td *ngFor="let historico of vinculo.historicos">{{ historico.autorizacaoBeneficio }}</td>
           <td *ngFor="let historico of vinculo.historicos">{{ historico.situacaoBeneficio }}</td>
         </tr>

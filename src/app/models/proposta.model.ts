@@ -8,4 +8,5 @@ export interface Proposta {
   valorLiberado: number;
   valorParcela: number;
   dataCadastro: string;
+  processada: boolean;
 }

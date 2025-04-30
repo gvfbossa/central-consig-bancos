@@ -52,6 +52,7 @@ export class SearchClienteComponent {
           this.cliente.vinculos.forEach(vinculo => {
             vinculo.historicos = vinculo.historicos ? vinculo.historicos.filter(historico => historico.dataConsulta && historico.dataConsulta.trim() !== '') : [];
           });
+          console.log('CLIENTE', this.cliente)
         }
         this.errorMessage = null;
       },

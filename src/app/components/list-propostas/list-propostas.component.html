@@ -62,6 +62,7 @@
             Limpar Seleção
         </button>
       </th>
+      <th>Processada</th>
     </tr>
   </thead>
   <tbody>
@@ -78,6 +79,13 @@
           type="checkbox"
           [(ngModel)]="proposta.selecionada"
           (change)="onSelecionarProposta(proposta, $event)"
+        />
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="proposta.processada"
+          (change)="onProcessarProposta(proposta, $event)"
         />
       </td>
     </tr>

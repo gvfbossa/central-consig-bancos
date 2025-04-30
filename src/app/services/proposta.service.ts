@@ -40,6 +40,10 @@ export class PropostaService {
       observe: 'response'
     });
   }
+
+  marcarPropostaComoProcessada(numeroProposta: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${numeroProposta}/processa`, null);
+  }
   
 
 }

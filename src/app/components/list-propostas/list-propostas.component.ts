@@ -93,6 +93,25 @@ export class PropostaListComponent implements OnInit {
       );
     }
   }
+
+  onProcessarProposta(proposta: Proposta, event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    proposta.processada = checkbox.checked;
+  
+    if (checkbox.checked) {
+      this.propostaService.marcarPropostaComoProcessada(proposta.numeroProposta).subscribe({
+        next: () => {
+          this.propostas = this.propostas.filter(p => p.numeroProposta !== proposta.numeroProposta);
+          this.propostasFiltradas = this.propostasFiltradas.filter(p => p.numeroProposta !== proposta.numeroProposta);
+        },
+        error: () => {
+          alert('Erro ao marcar proposta como processada.');
+          proposta.processada = false;
+          checkbox.checked = false;
+        }
+      });
+    }
+  }
   
   limparSelecao() {
     this.propostas.forEach(proposta => proposta.selecionada = false);
