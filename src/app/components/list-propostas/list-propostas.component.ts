@@ -61,7 +61,7 @@ export class PropostaListComponent implements OnInit {
 
   cancelarPropostasSelecionadas() {
     const confirmacao = confirm(
-      `Tem certeza que deseja cancelar ${this.propostasSelecionadas.length} proposta(s)?`
+      `As propostas selecionadas no sistema e que estiverem na planilha serão canceladas. Tem Certeza?`
     );
   
     if (confirmacao) {

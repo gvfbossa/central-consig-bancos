@@ -36,9 +36,8 @@
       <button
         *ngIf="propostas.length > 0"
         class="btn-cancelar"
-        (click)="cancelarPropostasSelecionadas()"
-        [disabled]="propostasSelecionadas.length === 0">
-        Cancelar Propostas Selecionadas
+        (click)="cancelarPropostasSelecionadas()">
+        Cancelar Propostas
       </button>
   </div>
 <div *ngIf="loading">Carregando propostas...</div>
