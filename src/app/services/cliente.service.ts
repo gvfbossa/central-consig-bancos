@@ -7,7 +7,7 @@ import { Cliente } from '../models/cliente.model';
   providedIn: 'root',
 })
 export class ClienteService {
-  private baseUrl = 'http://178.156.174.130:8443/';
+  private baseUrl = 'https://178.156.174.130:8443/';
 
   clientes: Cliente[] = [];
 

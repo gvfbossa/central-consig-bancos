@@ -7,7 +7,7 @@ import { Proposta } from '../models/proposta.model';
   providedIn: 'root',
 })
 export class PropostaService {
-  private baseUrl = 'http://178.156.174.130:8443/proposta';
+  private baseUrl = 'https://178.156.174.130:8443/proposta';
 
   constructor(private http: HttpClient) {}
 
