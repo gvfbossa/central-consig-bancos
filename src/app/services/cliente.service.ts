@@ -7,7 +7,7 @@ import { Cliente } from '../models/cliente.model';
   providedIn: 'root',
 })
 export class ClienteService {
-  private baseUrl = 'https://centralconsig.ngrok.app/';
+  private baseUrl = 'http://178.156.174.130:8080/';
 
   clientes: Cliente[] = [];
 

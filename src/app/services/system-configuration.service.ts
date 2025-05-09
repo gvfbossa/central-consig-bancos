@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SystemConfigurationService {
-  private baseUrl = 'https://centralconsig.ngrok.app/api/system-configuration';
+  private baseUrl = 'http://178.156.174.130:8080/api/system-configuration';
 
   constructor(private http: HttpClient) {}
 

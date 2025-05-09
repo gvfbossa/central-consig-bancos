@@ -7,7 +7,7 @@ import { Proposta } from '../models/proposta.model';
   providedIn: 'root',
 })
 export class PropostaService {
-  private baseUrl = 'https://centralconsig.ngrok.app/proposta';
+  private baseUrl = 'http://178.156.174.130:8080/proposta';
 
   constructor(private http: HttpClient) {}
 
