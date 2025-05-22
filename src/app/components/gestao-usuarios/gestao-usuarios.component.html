@@ -1,0 +1,64 @@
+<div class="gestao-usuarios">
+  <h2>Gestão de Usuários</h2>
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="login">Login:</label>
+      <input id="login" formControlName="login" type="text" placeholder="Digite o Login" [readonly]="modoEdicao"/>
+      <div *ngIf="usuarioForm.get('login')?.invalid && usuarioForm.get('login')?.touched">
+        <small *ngIf="usuarioForm.get('login')?.hasError('required')">Login é obrigatório.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="senha">Senha:</label>
+      <input id="senha" formControlName="senha" type="text" placeholder="Digite a Senha" />
+      <div *ngIf="usuarioForm.get('senha')?.invalid && usuarioForm.get('senha')?.touched">
+        <small *ngIf="usuarioForm.get('senha')?.hasError('required')">Senha é obrigatória.</small>
+      </div>
+    </div>
+
+    <div>
+      <label>
+        Somente Consulta:
+        <input type="checkbox" formControlName="somenteConsulta" />
+      </label>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit">{{ modoEdicao ? 'Salvar Alterações' : 'Adicionar' }}</button>
+      <button class="btn-rmv" type="button" (click)="cancelarEdicao()" *ngIf="modoEdicao">Cancelar</button>
+    </div>
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Login</th>
+      <th>Senha</th>
+      <th>Somente Consulta</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.login }}</td>
+      <td>{{ usuario.senha }}</td>
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="usuario.somenteConsulta"
+          (ngModelChange)="atualizarSomenteConsulta(usuario)" />
+      </td>
+      <td class="btns">
+        <button class="btn-edt" type="button" (click)="carregarUsuarioParaEdicao(usuario)">Editar</button>
+        <button class="btn-rmv" type="button" (click)="removerUsuario(usuario.login)">Remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
