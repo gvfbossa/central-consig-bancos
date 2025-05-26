@@ -15,7 +15,7 @@ export class SheetService {
   }
 
   deleteSheetByName(nome: string): Observable<void> {
-  return this.http.delete<void>(`${this.baseUrl}api/sheets/${encodeURIComponent(nome)}`);
+  return this.http.delete<void>(`${this.baseUrl}api/sheets/${encodeURIComponent('MARGEM CARTAO CAPITAL - ' + nome + '.csv')}`);
 }
 
   
