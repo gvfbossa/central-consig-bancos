@@ -15,10 +15,9 @@ export class SheetService {
   }
 
   deleteSheetByName(nome: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}api/sheets/nome`, {
-      params: { nome }
-    });
-  }
+  return this.http.delete<void>(`${this.baseUrl}api/sheets/nome?nome=${encodeURIComponent(nome)}`);
+}
+
   
   createSheet(sheet: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}api/sheets/nome`, sheet);
