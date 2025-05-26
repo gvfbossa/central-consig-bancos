@@ -14,10 +14,11 @@ export class SheetService {
     return this.http.get<any[]>(`${this.baseUrl}api/sheets`, {});
   }
 
-  deleteSheetByName(nome: string): Observable<void> {
-  return this.http.delete<void>(`${this.baseUrl}api/sheets/${encodeURIComponent('MARGEM CARTAO CAPITAL - ' + nome + '.csv')}`);
+deleteSheetByName(nome: string): Observable<void> {
+  const nomeArquivo = `MARGEM CARTAO CAPITAL - ${nome}.csv`;
+  const nomeCodificado = encodeURIComponent(nomeArquivo);
+  return this.http.delete<void>(`${this.baseUrl}api/sheets/${nomeCodificado}`);
 }
-
   
   createSheet(sheet: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}api/sheets/nome`, sheet);
