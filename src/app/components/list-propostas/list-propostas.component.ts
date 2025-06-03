@@ -47,6 +47,12 @@ export class PropostaListComponent implements OnInit {
 
     this.propostaService.getAllPropostas().subscribe({
       next: (res) => {
+        res.sort((a, b) => {
+          const dataA = new Date(a.dataCadastro).getTime();
+          const dataB = new Date(b.dataCadastro).getTime();
+          return dataB - dataA;
+        });
+        
         this.propostas = res;
         this.errorMessage = null;
         this.loading = false;
