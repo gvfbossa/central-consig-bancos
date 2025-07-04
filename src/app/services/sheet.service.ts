@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GoogleSheet } from '../models/google-sheet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,9 @@ deleteSheetByName(nome: string): Observable<void> {
   createSheet(sheet: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}api/sheets/nome`, sheet);
   }  
+
+  atualizarSheet(sheet: GoogleSheet): Observable<void> {
+   return this.http.post<any>(`${this.baseUrl}api/sheets/nome`, sheet); 
+  }
   
 }

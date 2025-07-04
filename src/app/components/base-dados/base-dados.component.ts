@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SheetService } from '../../services/sheet.service';
 import { GoogleSheet } from '../../models/google-sheet.model';
 
@@ -10,6 +10,7 @@ import { GoogleSheet } from '../../models/google-sheet.model';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './base-dados.component.html',
   styleUrl: './base-dados.component.css'
@@ -26,7 +27,8 @@ export class BaseDadosComponent {
   ) {
     this.sheetsForm = this.fb.group({
       fileName: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      preferencial: [false]
     });
 
     this.listarSheets();
@@ -51,7 +53,18 @@ private formatarNome(fileName: string): string {
     .trim();
 }
 
-inserirSheet() {
+atualizarPreferencial(sheet: GoogleSheet) {
+  this.sheetService.atualizarSheet(sheet).subscribe({
+    next: () => {
+      this.sheetsForm.reset();
+      this.listarSheets();
+      this.errorMessage = null;
+    },
+    error: () => this.errorMessage = 'Erro ao Atualizar a aba.'
+  });
+}
+
+inserirSheet() { //TODO - alterar a flag e chamar esse metodo pra fazer o put.
   if (this.sheetsForm.invalid) return;
 
   const nomeOriginal = this.sheetsForm.value.fileName.trim();

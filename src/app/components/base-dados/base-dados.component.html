@@ -11,6 +11,11 @@
         <label for="url">Link:</label>
         <input id="url" formControlName="url" type="text" placeholder="Digite o Link da Aba" />
       </div>
+
+      <div class="checkbox-wrapper">
+        <label for="preferencial">Preferencial:</label>
+        <input  class="pref__checkbox" id="preferencial" formControlName="preferencial" type="checkbox" />
+      </div>
   
       <button type="submit">Inserir</button>
     </form>
@@ -24,12 +29,19 @@
       <thead>
         <tr>
           <th>Nome</th>
+          <th>Preferencial</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody class="bd">
         <tr *ngFor="let sheet of sheets">
           <td class="dados">{{ sheet.fileName }}</td>
+          <td>
+            <input
+              type="checkbox"
+              [(ngModel)]="sheet.preferencial"
+              (ngModelChange)="atualizarPreferencial(sheet)" />
+          </td>
           <td>
             <button class="button-rmv" (click)="removerSheet(sheet.fileName)">Remover</button>
           </td>
