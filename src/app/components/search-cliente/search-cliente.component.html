@@ -33,8 +33,5 @@
     (click)="relatorioMargensCliente()">
       Relatório Margens Cliente</button> 
 </div>
-<button 
-  class="btn-atualizar"
-  (click)="atualizaBaseDeDadosCliente()">
-    Atualizar Base de Dados Cliente</button>
+<app-spinner *ngIf="loading"></app-spinner>
 <app-cliente-result [cliente]="cliente"></app-cliente-result>

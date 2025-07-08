@@ -51,5 +51,9 @@
   
     <p *ngIf="sheets.length === 0">Nenhuma aba cadastrada.</p>
 </div>
-  
+<button 
+  class="btn-atualizar"
+  (click)="atualizaBaseDeDadosCliente()">
+    Atualizar Base de Dados Cliente</button>
+  <app-spinner *ngIf="loading"></app-spinner>
 <div class="separator"><span>a</span></div>

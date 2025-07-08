@@ -1,9 +1,19 @@
 <header class="header">
-    <div class="header__logo">
-        <img src="assets/images/centralconsig-logo.png" alt="Logo" />
-    </div>
-    <div class="header__user">
-        <span class="header__user-name">Olá, {{ usuario }}</span>
-    </div>
+  <div class="header__logo">
+    <img src="assets/images/centralconsig-logo.png" alt="Logo" />
+  </div>
+
+  <div class="header__nav">
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
+      <li><a routerLink="/cliente" routerLinkActive="active-link">Clientes</a></li>
+      <li><a routerLink="/proposta" routerLinkActive="active-link">Propostas</a></li>
+      <li><a routerLink="/usuario" routerLinkActive="active-link">Usuários</a></li>
+      <li><a routerLink="/base-dados" routerLinkActive="active-link">Base Dados</a></li>
+    </ul>
+  </div>
+
+  <div class="header__user">
+    <span class="header__user-name">Olá, {{ usuario }}</span>
+  </div>
 </header>
-  

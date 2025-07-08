@@ -120,3 +120,9 @@
 .pref__checkbox {
   margin-left: -10rem;
 }
+
+.btn-atualizar {
+  width: 450px;
+  margin: 20px auto;
+  margin-top: -3rem;
+}

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResultClienteComponent } from '../result-cliente/result-cliente.component';
 import { Cliente } from '../../models/cliente.model';
+import { SpinnerComponent } from '../spinner/spinner.component';
 import FileSaver from 'file-saver';
 
 @Component({
@@ -13,7 +14,8 @@ import FileSaver from 'file-saver';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ResultClienteComponent
+    ResultClienteComponent,
+    SpinnerComponent
   ],
   templateUrl: './search-cliente.component.html',
   styleUrls: ['./search-cliente.component.css'],
@@ -24,6 +26,8 @@ export class SearchClienteComponent {
   cliente: Cliente | null = null;
   dataInicio: any;
   
+  loading: boolean = false;
+
   constructor(
     public clienteService: ClienteService,
     private fb: FormBuilder
@@ -83,14 +87,17 @@ export class SearchClienteComponent {
     if (this.dataInicio === undefined)
       this.dataInicio = new Date()
 
-    console.log('dataInicio ', this.dataInicio)
+      this.loading = true;
+
     this.clienteService.relatorioMargensCliente(this.dataInicio).subscribe((response) => {
           if (response.body) {
             const file = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const dataFormatada = new Date().toLocaleDateString('pt-BR');
             const nomeArquivo = "Relatorio_Clientes_Margens_" + dataFormatada + ".xlsx";
             FileSaver.saveAs(file, nomeArquivo);
+            this.loading = false
           } else {
+            this.loading = false;
             alert('Erro ao baixar o arquivo, tente novamente.');
           }
         });

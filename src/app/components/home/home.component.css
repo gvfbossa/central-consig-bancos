@@ -1,0 +1,17 @@
+.home__feature-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.home__section-title {
+  font-size: 2rem;
+  color: #012852;
+  margin-bottom: 40px;
+}
+
+.home__feature-cards {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  flex-wrap: wrap;
+}

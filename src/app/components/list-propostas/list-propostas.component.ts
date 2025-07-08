@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { SystemConfigurationService } from '../../services/system-configuration.service';
 import * as FileSaver from 'file-saver';
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 @Component({
   selector: 'app-proposta-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [CommonModule, FormsModule, MatIconModule, SpinnerComponent],
   templateUrl: './list-propostas.component.html',
   styleUrls: ['./list-propostas.component.css']
 })

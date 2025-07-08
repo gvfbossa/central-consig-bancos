@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { Usuario } from '../../models/usuario.model';
 import { UsuariosService } from '../../services/usuarios.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 @Component({
   selector: 'app-gestao-usuarios',
@@ -11,8 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
-  ],
+    FormsModule,
+    SpinnerComponent
+],
   templateUrl: './gestao-usuarios.component.html',
   styleUrl: './gestao-usuarios.component.css'
 })
@@ -21,6 +23,7 @@ export class GestaoUsuariosComponent implements OnInit {
   usuarioForm: FormGroup;
   usuarios: Usuario[] = [];
   modoEdicao: boolean = false;
+  loading: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -38,12 +41,15 @@ export class GestaoUsuariosComponent implements OnInit {
   }
 
   getAllUsuarios(): void {
+    this.loading = true
     this.usuariosService.getAllUsuarios().subscribe({
       next: (res: Usuario[]) => {
         this.usuarios = res;
         this.errorMessage = null;
+        this.loading = false
       },
       error: () => {
+        this.loading = false
         this.usuarios = [];
         this.errorMessage = 'Erro ao buscar os usuários';
       }
@@ -52,16 +58,19 @@ export class GestaoUsuariosComponent implements OnInit {
 
   adicionarUsuario(): void {
     if (this.usuarioForm.invalid) return;
-
+    this.loading = true
     const novoUsuario: Usuario = this.usuarioForm.value;
 
     this.usuariosService.addUsuario(novoUsuario).subscribe({
       next: () => {
         this.getAllUsuarios();
         this.usuarioForm.reset({ somenteConsulta: false });
+        this.loading = false
+
       },
       error: () => {
         this.errorMessage = 'Erro ao adicionar usuário';
+        this.loading = false
       }
     });
   }
