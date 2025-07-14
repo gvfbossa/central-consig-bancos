@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SystemConfigurationService {
-  private baseUrl = 'https://178.156.174.130:8443/api/system-configuration';
+  private baseUrl = 'https://api-centralconsig-margens-propostas.bossawebsolutions.com.br/api/system-configuration';
 
   constructor(private http: HttpClient) {}
 

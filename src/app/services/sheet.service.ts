@@ -7,7 +7,7 @@ import { GoogleSheet } from '../models/google-sheet.model';
   providedIn: 'root'
 })
 export class SheetService {
-  private baseUrl = 'https://178.156.174.130:8443/'; 
+  private baseUrl = 'https://api-centralconsig-margens-propostas.bossawebsolutions.com.br/'; 
 
   constructor(private http: HttpClient) {}
 
