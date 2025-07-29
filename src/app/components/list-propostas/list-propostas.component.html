@@ -10,7 +10,19 @@
   <span class="status-label">
     {{ propostaAutomaticaAtiva ? 'Ativado' : 'Desativado' }}
   </span>
-</div>  
+</div>
+<div class="toggle-container">
+  <label class="toggle-label">
+    Preenchimento Planilha Automático
+  </label>
+  <label class="switch">
+    <input type="checkbox" [checked]="propostaAutomaticaAtivaPlanilha" (change)="onToggle()" [disabled]="carregando">
+    <span class="slider"></span>
+  </label>
+  <span class="status-label">
+    {{ propostaAutomaticaAtivaPlanilha ? 'Ativado' : 'Desativado' }}
+  </span>
+</div>
 <div *ngIf="errorMessage" class="erro">{{ errorMessage }}</div>
 
 <div class="div-filtros">

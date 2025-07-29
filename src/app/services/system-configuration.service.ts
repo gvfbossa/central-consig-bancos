@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SystemConfigurationService {
+  
   private baseUrl = 'https://api-centralconsig-margens-propostas.bossawebsolutions.com.br/api/system-configuration';
 
   constructor(private http: HttpClient) {}
@@ -14,7 +15,15 @@ export class SystemConfigurationService {
     return this.http.get<boolean>(`${this.baseUrl}/proposta-automatica`);
   }
 
+  isPropostaAutomaticaPlanilhaAtiva(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/proposta-automatica-planilha`);
+  }
+
   togglePropostaAutomatica(): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/proposta-automatica/toggle`, {});
+  }
+
+  togglePropostaAutomaticaPlanilha() {
+    return this.http.post<void>(`${this.baseUrl}/proposta-automatica-planilha/toggle`, {});
   }
 }

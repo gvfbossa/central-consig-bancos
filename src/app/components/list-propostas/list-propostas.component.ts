@@ -23,13 +23,18 @@ export class PropostaListComponent implements OnInit {
   buscaTexto: string = '';
   propostasFiltradas: Proposta[] = [];
   propostaAutomaticaAtiva: boolean = false;
+  propostaAutomaticaAtivaPlanilha: boolean = false;
   carregando: boolean = false;
 
-  constructor(private propostaService: PropostaService, private sysConfigService: SystemConfigurationService, private cdRef: ChangeDetectorRef) {}
-  
+  constructor(private propostaService: PropostaService, private sysConfigService: SystemConfigurationService, private cdRef: ChangeDetectorRef) { }
+
   ngOnInit(): void {
     this.sysConfigService.isPropostaAutomaticaAtiva().subscribe(status => {
       this.propostaAutomaticaAtiva = status;
+    });
+
+    this.sysConfigService.isPropostaAutomaticaPlanilhaAtiva().subscribe(status => {
+      this.propostaAutomaticaAtivaPlanilha = status;
     });
 
     this.loadPropostas();
@@ -37,9 +42,39 @@ export class PropostaListComponent implements OnInit {
 
   onToggle() {
     this.carregando = true;
+
+    const ativando = !this.propostaAutomaticaAtiva;
+
     this.sysConfigService.togglePropostaAutomatica().subscribe(() => {
-      this.propostaAutomaticaAtiva = !this.propostaAutomaticaAtiva;
-      this.carregando = false;
+      this.propostaAutomaticaAtiva = ativando;
+
+      if (ativando && this.propostaAutomaticaAtivaPlanilha) {
+        this.sysConfigService.togglePropostaAutomaticaPlanilha().subscribe(() => {
+          this.propostaAutomaticaAtivaPlanilha = false;
+          this.carregando = false;
+        });
+      } else {
+        this.carregando = false;
+      }
+    });
+  }
+
+  onTogglePlanilha() {
+    this.carregando = true;
+
+    const ativando = !this.propostaAutomaticaAtivaPlanilha;
+
+    this.sysConfigService.togglePropostaAutomaticaPlanilha().subscribe(() => {
+      this.propostaAutomaticaAtivaPlanilha = ativando;
+
+      if (ativando && this.propostaAutomaticaAtiva) {
+        this.sysConfigService.togglePropostaAutomatica().subscribe(() => {
+          this.propostaAutomaticaAtiva = false;
+          this.carregando = false;
+        });
+      } else {
+        this.carregando = false;
+      }
     });
   }
 
@@ -53,7 +88,7 @@ export class PropostaListComponent implements OnInit {
           const dataB = new Date(b.dataCadastro).getTime();
           return dataB - dataA;
         });
-        
+
         this.propostas = res;
         this.errorMessage = null;
         this.loading = false;
@@ -70,10 +105,10 @@ export class PropostaListComponent implements OnInit {
     const confirmacao = confirm(
       `As propostas selecionadas no sistema e que estiverem na planilha serão canceladas. Tem Certeza?`
     );
-  
+
     if (confirmacao) {
       const numeros = this.propostasSelecionadas.map(p => p.numeroProposta);
-  
+
       this.propostaService.cancelarPropostas(numeros).subscribe({
         next: () => {
           alert('Propostas canceladas com sucesso!');
@@ -89,9 +124,9 @@ export class PropostaListComponent implements OnInit {
 
   onSelecionarProposta(proposta: Proposta, event: Event): void {
     const checkbox = event.target as HTMLInputElement;
-  
+
     proposta.selecionada = checkbox.checked;
-  
+
     if (checkbox.checked) {
       this.propostasSelecionadas.push(proposta);
     } else {
@@ -104,7 +139,7 @@ export class PropostaListComponent implements OnInit {
   onProcessarProposta(proposta: Proposta, event: Event) {
     const checkbox = event.target as HTMLInputElement;
     proposta.processada = checkbox.checked;
-  
+
     if (checkbox.checked) {
       this.propostaService.marcarPropostaComoProcessada(proposta.numeroProposta).subscribe({
         next: () => {
@@ -119,13 +154,13 @@ export class PropostaListComponent implements OnInit {
       });
     }
   }
-  
+
   limparSelecao() {
     this.propostas.forEach(proposta => proposta.selecionada = false);
     this.propostasSelecionadas = [];
     this.cdRef.detectChanges();
     this.propostasFiltradas = [...this.propostas];
-  }  
+  }
 
   filtrarPropostas() {
     this.propostasFiltradas = this.propostas.filter((proposta) => {
@@ -150,11 +185,11 @@ export class PropostaListComponent implements OnInit {
 
   baixarExcelPropostas() {
     let numerosPropostas = this.propostasSelecionadas.map(p => p.numeroProposta);
-    
+
     if (this.propostasSelecionadas.length === 0) {
       numerosPropostas = this.propostas.map(p => p.numeroProposta);
     }
-  
+
     this.propostaService.downloadExcelPropostas(numerosPropostas).subscribe((response) => {
       if (response.body) {
         const file = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -165,7 +200,7 @@ export class PropostaListComponent implements OnInit {
         alert('Erro ao baixar o arquivo, tente novamente.');
       }
     });
-  }  
-  
+  }
+
 
 }
