@@ -15,10 +15,10 @@ export class SystemConfigurationService {
     return this.http.get<SystemConfiguration>(`${this.baseUrl}/proposta-automatica`);
   }
 
-  atualizarConfiguracoes(propostaAutomaticaAtiva: boolean, propostaAutomaticaAtivaPlanilha: boolean): Observable<void> {
+  atualizarConfiguracoes(propostaAutomatica: boolean, propostaAutomaticaPlanilha: boolean): Observable<void> {
     const body = {
-      propostaAutomaticaAtiva,
-      propostaAutomaticaAtivaPlanilha
+      propostaAutomatica,
+      propostaAutomaticaPlanilha
     }
     return this.http.post<void>(`${this.baseUrl}/proposta-automatica/toggle`, body);
   }
