@@ -29,53 +29,36 @@ export class PropostaListComponent implements OnInit {
   constructor(private propostaService: PropostaService, private sysConfigService: SystemConfigurationService, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.sysConfigService.isPropostaAutomaticaAtiva().subscribe(status => {
-      this.propostaAutomaticaAtiva = status;
-    });
-
-    this.sysConfigService.isPropostaAutomaticaPlanilhaAtiva().subscribe(status => {
-      this.propostaAutomaticaAtivaPlanilha = status;
+    this.sysConfigService.getConfiguracoes().subscribe(status => {
+      this.propostaAutomaticaAtiva = status.propostaAutomaticaAtiva
+      this.propostaAutomaticaAtivaPlanilha = status.propostaAutomaticaAtivaPlanilha
     });
 
     this.loadPropostas();
   }
 
-  onToggle() {
+  onToggle(source: 'normal' | 'planilha') {
     this.carregando = true;
 
-    const ativando = !this.propostaAutomaticaAtiva;
-
-    this.sysConfigService.togglePropostaAutomatica().subscribe(() => {
+    if (source === 'normal') {
+      const ativando = !this.propostaAutomaticaAtiva;
       this.propostaAutomaticaAtiva = ativando;
 
-      if (ativando && this.propostaAutomaticaAtivaPlanilha) {
-        this.sysConfigService.togglePropostaAutomaticaPlanilha().subscribe(() => {
-          this.propostaAutomaticaAtivaPlanilha = false;
-          this.carregando = false;
-        });
-      } else {
-        this.carregando = false;
-      }
-    });
-  }
+      if (ativando) this.propostaAutomaticaAtivaPlanilha = false;
+    }
 
-  onTogglePlanilha() {
-    this.carregando = true;
-
-    const ativando = !this.propostaAutomaticaAtivaPlanilha;
-
-    this.sysConfigService.togglePropostaAutomaticaPlanilha().subscribe(() => {
+    if (source === 'planilha') {
+      const ativando = !this.propostaAutomaticaAtivaPlanilha;
       this.propostaAutomaticaAtivaPlanilha = ativando;
 
-      if (ativando && this.propostaAutomaticaAtiva) {
-        this.sysConfigService.togglePropostaAutomatica().subscribe(() => {
-          this.propostaAutomaticaAtiva = false;
-          this.carregando = false;
-        });
-      } else {
+      if (ativando) this.propostaAutomaticaAtiva = false;
+    }
+
+    this.sysConfigService
+      .atualizarConfiguracoes(this.propostaAutomaticaAtiva, this.propostaAutomaticaAtivaPlanilha)
+      .subscribe(() => {
         this.carregando = false;
-      }
-    });
+      });
   }
 
   async loadPropostas(): Promise<void> {

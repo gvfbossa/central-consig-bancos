@@ -4,7 +4,7 @@
     Preenchimento Automático
   </label>
   <label class="switch">
-    <input type="checkbox" [checked]="propostaAutomaticaAtiva" (change)="onToggle()" [disabled]="carregando">
+    <input type="checkbox" [checked]="propostaAutomaticaAtiva" (change)="onToggle('normal')" [disabled]="carregando">
     <span class="slider"></span>
   </label>
   <span class="status-label">
@@ -16,7 +16,7 @@
     Preenchimento Planilha Automático
   </label>
   <label class="switch">
-    <input type="checkbox" [checked]="propostaAutomaticaAtivaPlanilha" (change)="onTogglePlanilha()" [disabled]="carregando">
+    <input type="checkbox" [checked]="propostaAutomaticaAtivaPlanilha" (change)="onToggle('planilha')" [disabled]="carregando">
     <span class="slider"></span>
   </label>
   <span class="status-label">

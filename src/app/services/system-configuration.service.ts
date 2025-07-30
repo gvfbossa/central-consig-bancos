@@ -1,29 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SystemConfiguration } from '../models/system-configuration.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SystemConfigurationService {
-  
   private baseUrl = 'https://api-centralconsig-margens-propostas.bossawebsolutions.com.br/api/system-configuration';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  isPropostaAutomaticaAtiva(): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/proposta-automatica`);
+  getConfiguracoes(): Observable<SystemConfiguration> {
+    return this.http.get<SystemConfiguration>(`${this.baseUrl}/proposta-automatica`);
   }
 
-  isPropostaAutomaticaPlanilhaAtiva(): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/proposta-automatica-planilha`);
+  atualizarConfiguracoes(propostaAutomaticaAtiva: boolean, propostaAutomaticaAtivaPlanilha: boolean): Observable<void> {
+    const body = {
+      propostaAutomaticaAtiva,
+      propostaAutomaticaAtivaPlanilha
+    }
+    return this.http.post<void>(`${this.baseUrl}/proposta-automatica/toggle`, body);
   }
 
-  togglePropostaAutomatica(): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/proposta-automatica/toggle`, {});
-  }
-
-  togglePropostaAutomaticaPlanilha() {
-    return this.http.post<void>(`${this.baseUrl}/proposta-automatica-planilha/toggle`, {});
-  }
 }
